@@ -1,0 +1,19 @@
+{
+  "name": "mokobot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Witsae/mokobot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Witsae/mokobot/issues"
+  },
+  "homepage": "https://github.com/Witsae/mokobot#readme"
+}
