@@ -1,0 +1,22 @@
+{
+  "name": "mokobot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.309.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Witsae/mokobot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Witsae/mokobot/issues"
+  },
+  "homepage": "https://github.com/Witsae/mokobot#readme",
+  "description": ""
+}

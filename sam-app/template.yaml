@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
   Function:
-    Timeout: 3
+    Timeout: 15
 
 Resources:
   HelloWorldFunction:
@@ -25,6 +25,69 @@ Resources:
           Properties:
             Path: /hello
             Method: get
+
+  AddPlayerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: player/
+      Handler: add.lambdaHandler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        AddPlayer:
+          Type: Api
+          Properties:
+            Path: /player
+            Method: post
+      Layers:
+        - !Ref CommonLayer
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PlayerTable
+
+  GetPlayerFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: player/
+      Handler: get.lambdaHandler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        GetPlayer:
+          Type: Api
+          Properties:
+            Path: /player
+            Method: get
+      Layers:
+        - !Ref CommonLayer
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref PlayerTable
+
+  CommonLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      CompatibleRuntimes:
+        - nodejs18.x
+      LayerName: common-layer
+      ContentUri: ./node_modules
+      Description: 공용 레이어
+      LicenseInfo: my layer license
+  PlayerTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      AttributeDefinitions:
+        - AttributeName: discordID
+          AttributeType: S
+      KeySchema:
+        - AttributeName: discordID
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      TableName: playerTable
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
