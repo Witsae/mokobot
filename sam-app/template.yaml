@@ -26,6 +26,27 @@ Resources:
             Path: /hello
             Method: get
 
+  DiscordHelloFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      CodeUri: hello-world/
+      Handler: discord.lambdaHandler
+      Runtime: nodejs18.x
+      Architectures:
+        - x86_64
+      Events:
+        HelloWorld:
+          Type: HttpApi
+          Properties:
+            Method: ANY
+            Path: /discord
+            TimeoutInMillis: 30000
+            PayloadFormatVersion: "2.0"
+            RouteSettings:
+              ThrottlingBurstLimit: 600
+      Layers:
+        - !Ref CommonLayer
+
   AddPlayerFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -75,6 +96,7 @@ Resources:
       ContentUri: ./node_modules
       Description: 공용 레이어
       LicenseInfo: my layer license
+
   PlayerTable:
     Type: AWS::DynamoDB::Table
     Properties:

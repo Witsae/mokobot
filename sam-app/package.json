@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "dependencies": {
-    "@aws-sdk/client-dynamodb": "^3.309.0"
+    "@aws-sdk/client-dynamodb": "^3.309.0",
+    "tweetnacl": "^1.0.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
